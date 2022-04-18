@@ -16,7 +16,9 @@ jobs:
       with:
         node-version: 12
     - name: yarn install
-      run: yarn install
+      run: |
+        yarn install
+        yarn build
     - name: lighthouse check
       run: |
         npm install @lhci/cli@0.9.x

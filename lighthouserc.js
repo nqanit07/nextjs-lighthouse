@@ -2,7 +2,7 @@ module.exports = {
     ci: {
         collect: {
             numberOfRuns: 1,
-            staticDistDir: '../.next',
+            staticDistDir: './.next',
         },
         assert: {
             assertions: {
