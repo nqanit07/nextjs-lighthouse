@@ -8,7 +8,7 @@ on:
     - main
 jobs:
   lighthouse-ci:
-    run-on: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: install node v12
@@ -19,5 +19,5 @@ jobs:
       run: yarn install
     - name: lighthouse check
       run: |
-        npm install -g@lhci/cli@0.9.x
-        lhci autorun
+        npm install @lhci/cli@0.9.x
+        yarn run lhci
