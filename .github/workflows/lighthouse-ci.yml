@@ -24,7 +24,7 @@ jobs:
       uses: treosh/lighthouse-ci-action@v8
       with:
         urls: https://google.com,https://vnexpress.net
-        configPath: /.github/workflows/lighthousesrc.json
+        configPath: ./.github/workflows/lighthousesrc.json
         uploadArtifacts: true
         temporaryPublicStorage: true
         runs: 1
