@@ -3,6 +3,9 @@ module.exports = {
         collect: {
             numberOfRuns: 1,
             staticDistDir: './.next',
+            settings: {
+                "configPath": "./.github/workflows/lighthouse-config.js"
+            }
         },
         assert: {
             assertions: {
