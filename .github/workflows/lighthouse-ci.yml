@@ -23,7 +23,9 @@ jobs:
       id: lighthouse_audit
       uses: treosh/lighthouse-ci-action@v8
       with:
-        urls: https://google.com,https://vnexpress.net
+        urls: |
+          https://google.com
+          https://vnexpress.net
         configPath: ./.github/workflows/lighthousesrc.json
         uploadArtifacts: true
         temporaryPublicStorage: true
