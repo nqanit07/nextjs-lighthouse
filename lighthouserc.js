@@ -1,11 +1,13 @@
 module.exports = {
     ci: {
         collect: {
+            startServerCommand: "export PORT=3000 && yarn start",
+            url: ["https://google.com"],
             numberOfRuns: 1,
-            staticDistDir: './.next',
             settings: {
                 "configPath": "./.github/workflows/lighthouse-config.js"
             }
+            
         },
         assert: {
             assertions: {

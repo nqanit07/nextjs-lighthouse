@@ -19,11 +19,15 @@ jobs:
       run: |
         yarn install
         yarn build
-    - name: Lighthouse Audit
+    - name: Audit URLs using Lighthouse
       id: lighthouse_audit
-      run: |
-        npm install @lhci/cli@0.9.x
-        yarn run lhci
+      uses: treosh/lighthouse-ci-action@v8
+      with:
+        urls: https://google.com,https://vnexpress.net
+        configPath: ./lighthousesrc.json
+        uploadArtifacts: true
+        temporaryPublicStorage: true
+        runs: 1
     - name: Format lighthouse score
       id: format_lighthouse_score
       uses: actions/github-script@v5
