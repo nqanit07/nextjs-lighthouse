@@ -19,12 +19,14 @@ jobs:
       run: |
         yarn install
         yarn build
+        export PORT=3001
+        yarn start
     - name: Audit URLs using Lighthouse
       id: lighthouse_audit
       uses: treosh/lighthouse-ci-action@v8
       with:
         urls: |
-          https://google.com
+          http://localhost:3001/404.html
           https://vnexpress.net
         configPath: ./.github/workflows/lighthousesrc.json
         uploadArtifacts: true
