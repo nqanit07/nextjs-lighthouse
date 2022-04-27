@@ -18,6 +18,7 @@ jobs:
     - name: yarn install
       run: |
         yarn install
+        yarn build
         yarn start
     - name: Audit URLs using Lighthouse
       id: lighthouse_audit
