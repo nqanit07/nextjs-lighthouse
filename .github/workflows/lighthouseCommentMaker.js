@@ -38,8 +38,8 @@
   */
 function makeComment(lighthouseOutputs) {
   const reportLinks = Object.entries(lighthouseOutputs.links);
-  console.log(JSON.stringify(reportLinks));
-  const reports = lighthouseOutputs.manifest.map((manifest) => {
+  console.log(JSON.stringify(reportLinks[0]));
+  const reports = lighthouseOutputs.manifest.map((manifest, index) => {
     let report = `
       *Lighthouse ran against [${manifest.url}](${manifest.url})*. Here's the summary:
       | Category | Score |
@@ -49,7 +49,7 @@ function makeComment(lighthouseOutputs) {
       ${scoreRow('Best practices', manifest.summary['best-practices'])}
       ${scoreRow('SEO', manifest.summary.seo)}
       ${scoreRow('PWA', manifest.summary.pwa)}
-      [Report details](${reportLinks[manifest.url]}). 
+      [Report details](${reportLinks[index][1]}). 
 
     `;
     return report;
