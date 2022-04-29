@@ -36,26 +36,27 @@
  /**
   * @param {LighthouseOutputs} lighthouseOutputs
   */
- function makeComment(lighthouseOutputs) {
-   const { summary } = lighthouseOutputs.manifest[0];
-   const [[testedUrl, reportUrl]] = Object.entries(lighthouseOutputs.links);
+function makeComment(lighthouseOutputs) {
+  
+  const reports = lighthouseOutputs.manifest.map((manifest, index) => {
+    const [testedUrl, reportUrl] = Object.entries(lighthouseOutputs.links[index]);
+    let report = `
+      *Lighthouse ran against [${testedUrl}](${testedUrl})*. Here's the summary:
+      | Category | Score |
+      | -------- | ----- |
+      ${scoreRow('Performance', manifest.summary.performance)}
+      ${scoreRow('Accessibility', manifest.summary.accessibility)}
+      ${scoreRow('Best practices', manifest.summary['best-practices'])}
+      ${scoreRow('SEO', manifest.summary.seo)}
+      ${scoreRow('PWA', manifest.summary.pwa)}
+      [Report details](${reportUrl}). 
+
+    `;
+    return report;
+    })
+  let comment = `## ⚡️🏠 Lighthouse report` + reports.join();
  
-   const comment = `## ⚡️🏠 Lighthouse report
- 
- We ran Lighthouse against the changes and produced this [report](${reportUrl}). Here's the summary:
- 
- | Category | Score |
- | -------- | ----- |
- ${scoreRow('Performance', summary.performance)}
- ${scoreRow('Accessibility', summary.accessibility)}
- ${scoreRow('Best practices', summary['best-practices'])}
- ${scoreRow('SEO', summary.seo)}
- ${scoreRow('PWA', summary.pwa)}
- 
- *Lighthouse ran against [${testedUrl}](${testedUrl})*
- `;
- 
-   return comment;
+  return comment;
  }
  
  module.exports = ({ lighthouseOutputs }) => {

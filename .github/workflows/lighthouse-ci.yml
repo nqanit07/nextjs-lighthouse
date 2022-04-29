@@ -29,18 +29,6 @@ jobs:
           https://d2upnnbo2caoiy.cloudfront.net/
           https://d2upnnbo2caoiy.cloudfront.net/investing/philosophy/
           https://d2upnnbo2caoiy.cloudfront.net/investing/impact-investing/
-          https://d2upnnbo2caoiy.cloudfront.net/debt/debt-and-loans/
-          https://d2upnnbo2caoiy.cloudfront.net/debt/credit-score-improvement/
-          https://d2upnnbo2caoiy.cloudfront.net/debt/debt-management/
-          https://d2upnnbo2caoiy.cloudfront.net/debt/refinancing/
-          https://d2upnnbo2caoiy.cloudfront.net/planning/cash-management/
-          https://d2upnnbo2caoiy.cloudfront.net/planning/retirement-planning/
-          https://d2upnnbo2caoiy.cloudfront.net/planning/emergency-savings/
-          https://d2upnnbo2caoiy.cloudfront.net/about-us/who-we-are/
-          https://d2upnnbo2caoiy.cloudfront.net/about-us/our-core-values/
-          https://d2upnnbo2caoiy.cloudfront.net/about-us/faq/
-          https://d2upnnbo2caoiy.cloudfront.net/onboarding/
-          https://d2upnnbo2caoiy.cloudfront.net/dashboard/financial-profile/
         configPath: ./.github/workflows/lighthousesrc.json
         uploadArtifacts: true
         temporaryPublicStorage: true
