@@ -32,7 +32,7 @@ jobs:
         configPath: ./.github/workflows/lighthousesrc.json
         uploadArtifacts: true
         temporaryPublicStorage: true
-        runs: 3
+        runs: 1
     - name: Format Lighthouse score
       id: format_lighthouse_score
       uses: actions/github-script@v5

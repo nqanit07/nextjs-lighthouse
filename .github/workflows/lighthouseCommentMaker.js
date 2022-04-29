@@ -37,12 +37,10 @@
   * @param {LighthouseOutputs} lighthouseOutputs
   */
 function makeComment(lighthouseOutputs) {
-  
-  const reports = lighthouseOutputs.manifest.map((manifest, index) => {
-    console.log(JSON.stringify(lighthouseOutputs.links))
-    const [[testedUrl, reportUrl]] = Object.entries(lighthouseOutputs.links);
+  const reportLinks = Object.entries(lighthouseOutputs.links);
+  const reports = lighthouseOutputs.manifest.map((manifest) => {
     let report = `
-      *Lighthouse ran against [${testedUrl}](${testedUrl})*. Here's the summary:
+      *Lighthouse ran against [${manifest.url}](${manifest.url})*. Here's the summary:
       | Category | Score |
       | -------- | ----- |
       ${scoreRow('Performance', manifest.summary.performance)}
@@ -50,7 +48,7 @@ function makeComment(lighthouseOutputs) {
       ${scoreRow('Best practices', manifest.summary['best-practices'])}
       ${scoreRow('SEO', manifest.summary.seo)}
       ${scoreRow('PWA', manifest.summary.pwa)}
-      [Report details](${reportUrl}). 
+      [Report details](${reportLinks[manifest.url]}). 
 
     `;
     return report;
