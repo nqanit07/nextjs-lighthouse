@@ -50,6 +50,7 @@ ${scoreRow('Accessibility', manifest.summary.accessibility)}
 ${scoreRow('Best practices', manifest.summary['best-practices'])}
 ${scoreRow('SEO', manifest.summary.seo)}
 ${scoreRow('PWA', manifest.summary.pwa)}
+
 [Report details](${reportURL}).
 
 `;
