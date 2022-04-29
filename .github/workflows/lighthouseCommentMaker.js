@@ -56,7 +56,7 @@ ${scoreRow('PWA', manifest.summary.pwa)}
 `;
     return report;
     })
-  let comment = `## ⚡️🏠 Lighthouse report` + reports.join();   
+  let comment = `## ⚡️🏠 Lighthouse report` + reports.join("");   
  
   return comment;
  }
