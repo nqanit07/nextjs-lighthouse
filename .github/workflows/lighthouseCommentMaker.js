@@ -41,17 +41,18 @@ function makeComment(lighthouseOutputs) {
   const reports = lighthouseOutputs.manifest.map((manifest, index) => {
     const [testedURL, reportURL] = reportLinks[index];
     let report = `
-      *Lighthouse ran against [${testedURL}](${testedURL})*. Here's the summary:
-      | Category | Score |
-      | -------- | ----- |
-      ${scoreRow('Performance', manifest.summary.performance)}
-      ${scoreRow('Accessibility', manifest.summary.accessibility)}
-      ${scoreRow('Best practices', manifest.summary['best-practices'])}
-      ${scoreRow('SEO', manifest.summary.seo)}
-      ${scoreRow('PWA', manifest.summary.pwa)}
-      [Report details](${reportURL}).
+*${index + 1}. Lighthouse ran against [${testedURL}](${testedURL})*. Here's the summary:
 
-    `;
+| Category | Score |
+| -------- | ----- |
+${scoreRow('Performance', manifest.summary.performance)}
+${scoreRow('Accessibility', manifest.summary.accessibility)}
+${scoreRow('Best practices', manifest.summary['best-practices'])}
+${scoreRow('SEO', manifest.summary.seo)}
+${scoreRow('PWA', manifest.summary.pwa)}
+[Report details](${reportURL}).
+
+`;
     return report;
     })
   let comment = `## ⚡️🏠 Lighthouse report` + reports.join();   
