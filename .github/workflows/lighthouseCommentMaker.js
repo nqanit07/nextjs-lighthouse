@@ -38,6 +38,7 @@
   */
 function makeComment(lighthouseOutputs) {
   const reportLinks = Object.entries(lighthouseOutputs.links);
+  console.log(JSON.stringify(reportLinks));
   const reports = lighthouseOutputs.manifest.map((manifest) => {
     let report = `
       *Lighthouse ran against [${manifest.url}](${manifest.url})*. Here's the summary:
