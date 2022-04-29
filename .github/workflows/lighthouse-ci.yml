@@ -1,23 +1,57 @@
 name: Lighthouse CI
 on:
-  push:
-    branches:
-    - main
   pull_request:
+    types: [closed]
     branches:
     - main
 jobs:
-  lighthouse-ci:
+  lighthouse-audit-report:
+    if: github.event_name == 'pull_request' && github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: install node v12
-      uses: actions/setup-node@v1
+    
+    - name: Waiting for The Staging Site up
+      id: wait_for_preview
+      uses: nev7n/wait_for_response@v1
       with:
-        node-version: 12
-    - name: yarn install
-      run: yarn install
-    - name: lighthouse check
-      run: |
-        npm install -g@lhci/cli@0.9.x
-        lhci autorun
+        url: 'https://d2upnnbo2caoiy.cloudfront.net'
+        responseCode: 200
+        timeout: 600000
+        interval: 1000
+
+    - name: Audit URLs using Lighthouse
+      id: lighthouse_audit
+      uses: treosh/lighthouse-ci-action@v8
+      with:
+        urls: |
+          https://d2upnnbo2caoiy.cloudfront.net/
+          https://d2upnnbo2caoiy.cloudfront.net/investing/philosophy/
+          https://d2upnnbo2caoiy.cloudfront.net/investing/impact-investing/
+        configPath: ./.github/workflows/lighthousesrc.json
+        uploadArtifacts: true
+        temporaryPublicStorage: true
+        runs: 1
+    - name: Format Lighthouse score
+      id: format_lighthouse_score
+      uses: actions/github-script@v5
+      with:
+        script: |
+          const lighthouseCommentMaker = require('./.github/workflows/lighthouseCommentMaker.js');
+
+          const lighthouseOutputs = {
+            manifest: ${{ steps.lighthouse_audit.outputs.manifest }},
+            links: ${{ steps.lighthouse_audit.outputs.links }}
+          };
+
+          const comment = lighthouseCommentMaker({ lighthouseOutputs });
+          core.setOutput("comment", comment);
+
+    - name: Add Lighthouse stats as comment
+      id: comment_to_pr
+      uses: marocchino/sticky-pull-request-comment@v2.0.0
+      with:
+        GITHUB_TOKEN: ${{ github.token }}
+        number: ${{ github.event.pull_request.number }}
+        header: lighthouse
+        message: ${{ steps.format_lighthouse_score.outputs.comment }}
