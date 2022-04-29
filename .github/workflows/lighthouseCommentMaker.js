@@ -39,7 +39,7 @@
 function makeComment(lighthouseOutputs) {
   
   const reports = lighthouseOutputs.manifest.map((manifest, index) => {
-    const [testedUrl, reportUrl] = lighthouseOutputs.links[index];
+    const [testedUrl, reportUrl] = Object.entries(lighthouseOutputs.links)[index];
     let report = `
       *Lighthouse ran against [${testedUrl}](${testedUrl})*. Here's the summary:
       | Category | Score |
